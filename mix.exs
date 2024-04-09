@@ -16,7 +16,7 @@ defmodule Papa.MixProject do
   def application do
     [
       mod: {Papa.Application, []},
-      extra_applications: [:logger]
+      extra_applications: [:ex_machina, :logger]
     ]
   end
 
@@ -28,10 +28,9 @@ defmodule Papa.MixProject do
   defp deps do
     [
       {:ecto_sql, "~> 3.0"},
-      {:ecto_sqlite3, "~> 0.13"}
-
-      # {:dep_from_hexpm, "~> 0.3.0"},
-      # {:dep_from_git, git: "https://github.com/elixir-lang/my_dep.git", tag: "0.1.0"}
+      {:ecto_sqlite3, "~> 0.13"},
+      {:ex_machina, "~> 2.7.0", only: :test},
+      {:faker, "~> 0.18", only: :test}
     ]
   end
 end
