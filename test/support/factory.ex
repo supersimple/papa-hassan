@@ -16,4 +16,8 @@ defmodule Papa.Factory do
       tasks: ["Abc", "123"]
     }
   end
+
+  def transaction_factory do
+    %Papa.Schemas.Transaction{}
+  end
 end
