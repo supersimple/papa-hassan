@@ -9,7 +9,7 @@ defmodule Papa.Schemas.Visit do
     field(:minutes, :integer)
     field(:tasks, {:array, :string})
 
-    belongs_to(:user, User, type: :binary_id)
+    belongs_to(:member, User, type: :binary_id, foreign_key: :member_id)
 
     timestamps(type: :utc_datetime_usec)
   end

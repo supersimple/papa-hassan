@@ -7,7 +7,7 @@ defmodule Papa.Repo.Migrations.CreateVisit do
       add :date, :utc_datetime
       add :minutes, :integer
       add :tasks, :binary
-      add :user_id, references(:user), null: false
+      add :member_id, references(:user), null: false
 
       timestamps()
     end

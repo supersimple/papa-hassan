@@ -12,7 +12,7 @@ defmodule Papa.Schemas.VisitTest do
     {:minutes, :integer},
     {:tasks, {:array, :string}},
     {:updated_at, :utc_datetime_usec},
-    {:user_id, :binary_id}
+    {:member_id, :binary_id}
   ]
 
   describe "fields and types" do
@@ -21,8 +21,8 @@ defmodule Papa.Schemas.VisitTest do
 
   test "visit factory" do
     user = insert(:user)
-    visit = insert(:visit, user: user)
-    expected_keys = [:date, :minutes, :tasks, :user]
+    visit = insert(:visit, member: user)
+    expected_keys = [:date, :minutes, :tasks, :member]
 
     # Assert that all of the keys we expect the factory to supply contain values
     expected_keys |> Enum.all?(&refute is_nil(Map.get(visit, &1)))
