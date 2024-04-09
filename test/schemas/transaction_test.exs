@@ -8,9 +8,9 @@ defmodule Papa.Schemas.TransactionTest do
   @transaction_fields_and_types [
     {:id, :binary_id},
     {:inserted_at, :utc_datetime_usec},
-    {:updated_at, :utc_datetime_usec},
     {:member_id, :binary_id},
     {:pal_id, :binary_id},
+    {:updated_at, :utc_datetime_usec},
     {:visit_id, :binary_id}
   ]
 

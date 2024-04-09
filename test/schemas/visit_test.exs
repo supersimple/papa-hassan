@@ -9,10 +9,10 @@ defmodule Papa.Schemas.VisitTest do
     {:date, :utc_datetime_usec},
     {:id, :binary_id},
     {:inserted_at, :utc_datetime_usec},
+    {:member_id, :binary_id},
     {:minutes, :integer},
     {:tasks, {:array, :string}},
-    {:updated_at, :utc_datetime_usec},
-    {:member_id, :binary_id}
+    {:updated_at, :utc_datetime_usec}
   ]
 
   describe "fields and types" do
