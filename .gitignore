@@ -24,3 +24,7 @@ papa-*.tar
 
 # Temporary files, for example, from tests.
 /tmp/
+
+papa_repo
+papa_repo-wal
+papa_repo-shm
