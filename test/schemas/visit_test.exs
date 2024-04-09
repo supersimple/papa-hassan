@@ -22,9 +22,9 @@ defmodule Papa.Schemas.VisitTest do
   test "visit factory" do
     user = insert(:user)
     visit = insert(:visit, member: user)
-    expected_keys = [:date, :minutes, :tasks, :member]
 
-    # Assert that all of the keys we expect the factory to supply contain values
-    expected_keys |> Enum.all?(&refute is_nil(Map.get(visit, &1)))
+    keys = [:date, :minutes, :tasks, :member]
+
+    assert_map_contains_values_for_keys(visit, keys)
   end
 end

@@ -20,9 +20,9 @@ defmodule Papa.Schemas.UserTest do
 
   test "user factory" do
     user = insert(:user)
-    expected_keys = [:first_name, :last_name, :email]
 
-    # Assert that all of the keys we expect the factory to supply contain values
-    expected_keys |> Enum.all?(&refute is_nil(Map.get(user, &1)))
+    keys = [:first_name, :last_name, :email]
+
+    assert_map_contains_values_for_keys(user, keys)
   end
 end

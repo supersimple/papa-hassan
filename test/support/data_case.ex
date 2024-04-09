@@ -56,4 +56,8 @@ defmodule Papa.DataCase do
         anything_else
     end
   end
+
+  def assert_map_contains_values_for_keys(map, keys) do
+    keys |> Enum.all?(&refute is_nil(Map.get(map, &1)))
+  end
 end

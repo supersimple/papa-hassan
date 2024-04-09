@@ -23,9 +23,9 @@ defmodule Papa.Schemas.TransactionTest do
     pal = insert(:user)
     visit = insert(:visit, member: member) |> IO.inspect()
     transaction = insert(:transaction, member: member, pal: pal, visit: visit)
-    expected_keys = [:member_id, :pal_id, :visit_id]
 
-    # Assert that all of the keys we expect the factory to supply contain values
-    expected_keys |> Enum.all?(&refute is_nil(Map.get(transaction, &1)))
+    keys = [:member_id, :pal_id, :visit_id]
+
+    assert_map_contains_values_for_keys(transaction, keys)
   end
 end
