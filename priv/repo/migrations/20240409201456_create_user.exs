@@ -4,7 +4,6 @@ defmodule Papa.Repo.Migrations.CreateUser do
   def change do
     create table(:user, primary_key: false) do
       add :id, :binary_id, primary_key: true
-
       add :first_name, :string
       add :last_name, :string
       add :email, :string

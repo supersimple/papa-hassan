@@ -8,4 +8,12 @@ defmodule Papa.Factory do
       email: Faker.Internet.email()
     }
   end
+
+  def visit_factory do
+    %Papa.Schemas.Visit{
+      minutes: Faker.random_between(0, 120),
+      date: Faker.DateTime.backward(1_000),
+      tasks: ["Abc", "123"]
+    }
+  end
 end

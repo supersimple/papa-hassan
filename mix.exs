@@ -30,7 +30,8 @@ defmodule Papa.MixProject do
       {:ecto_sql, "~> 3.0"},
       {:ecto_sqlite3, "~> 0.13"},
       {:ex_machina, "~> 2.7.0", only: :test},
-      {:faker, "~> 0.18", only: :test}
+      {:faker, "~> 0.18", only: :test},
+      {:jason, "~> 1.4"}
     ]
   end
 end

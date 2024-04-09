@@ -6,12 +6,12 @@ defmodule Papa.Schemas.UserTest do
   import Papa.Factory
 
   @user_fields_and_types [
-    {:first_name, :string},
-    {:last_name, :string},
     {:email, :string},
+    {:first_name, :string},
     {:id, :binary_id},
-    {:updated_at, :utc_datetime_usec},
-    {:inserted_at, :utc_datetime_usec}
+    {:inserted_at, :utc_datetime_usec},
+    {:last_name, :string},
+    {:updated_at, :utc_datetime_usec}
   ]
 
   describe "fields and types" do
