@@ -8,3 +8,5 @@ config :papa, Papa.Repo,
   username: "user",
   password: "pass",
   hostname: "localhost"
+
+config :logger, level: :warning
