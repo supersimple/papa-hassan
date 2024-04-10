@@ -6,7 +6,7 @@ defmodule Papa.Schemas.User do
   alias Papa.Schemas.Visit
 
   @attributes [:first_name, :last_name, :email]
-  @required_attributes [:email]
+  @required_attributes [:first_name, :email]
 
   @primary_key {:id, :binary_id, autogenerate: true}
   schema "user" do
