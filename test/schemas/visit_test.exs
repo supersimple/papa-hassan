@@ -3,8 +3,6 @@ defmodule Papa.Schemas.VisitTest do
 
   alias Papa.Schemas.Visit
 
-  import Papa.Factory
-
   @visit_fields_and_types [
     {:date, :utc_datetime_usec},
     {:id, :binary_id},

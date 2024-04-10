@@ -20,6 +20,7 @@ defmodule Papa.DataCase do
       import Ecto.Changeset
       import Ecto.Query
       import Papa.DataCase
+      import Papa.Factory
 
       alias Papa.Repo
     end

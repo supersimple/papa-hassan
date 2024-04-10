@@ -27,6 +27,7 @@ defmodule Papa.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
+      {:ecto_commons, "~> 0.3.4"},
       {:ecto_sql, "~> 3.0"},
       {:ecto_sqlite3, "~> 0.13"},
       {:ex_machina, "~> 2.7.0", only: :test},

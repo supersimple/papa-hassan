@@ -3,8 +3,6 @@ defmodule Papa.Schemas.UserTest do
 
   alias Papa.Schemas.User
 
-  import Papa.Factory
-
   @user_fields_and_types [
     {:email, :string},
     {:first_name, :string},

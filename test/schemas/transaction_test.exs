@@ -3,8 +3,6 @@ defmodule Papa.Schemas.TransactionTest do
 
   alias Papa.Schemas.Transaction
 
-  import Papa.Factory
-
   @transaction_fields_and_types [
     {:id, :binary_id},
     {:inserted_at, :utc_datetime_usec},
@@ -21,7 +19,7 @@ defmodule Papa.Schemas.TransactionTest do
   test "transaction factory" do
     member = insert(:user)
     pal = insert(:user)
-    visit = insert(:visit, member: member) |> IO.inspect()
+    visit = insert(:visit, member: member)
     transaction = insert(:transaction, member: member, pal: pal, visit: visit)
 
     keys = [:member_id, :pal_id, :visit_id]
