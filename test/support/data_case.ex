@@ -26,6 +26,17 @@ defmodule Papa.DataCase do
     end
   end
 
+  setup tags do
+    Papa.DataCase.setup_sandbox(tags)
+    :ok
+  end
+
+  def setup_sandbox(tags) do
+    pid = Ecto.Adapters.SQL.Sandbox.start_owner!(Papa.Repo, shared: not tags[:async])
+    on_exit(fn -> Ecto.Adapters.SQL.Sandbox.stop_owner(pid) end)
+  end
+
+
   defmacro validate_schema_fields_and_types(schema, expected_schemas_and_types) do
     quote do
       test "#{unquote(schema)}: it has the correct fields and types" do

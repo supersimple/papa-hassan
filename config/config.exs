@@ -10,3 +10,5 @@ config :papa, Papa.Repo,
   hostname: "localhost"
 
 config :logger, level: :warning
+
+import_config "#{config_env()}.exs"
