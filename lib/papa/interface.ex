@@ -1,12 +1,21 @@
 defmodule Papa.Interface do
-  alias Papa.{User, View}
+  alias Papa.{User, View, Visit}
 
   def create_user(first_name, last_name, email) do
     %{first_name: first_name, last_name: last_name, email: email}
-    |> Papa.User.create()
+    |> User.create()
     |> case do
       {:error, changeset} -> View.changeset_error_to_human_friendly(changeset)
       {:ok, user} -> View.create_user(user)
+    end
+  end
+
+  def request_visit(user_id, date_time, tasks) do
+    %{member_id: user_id, date: date_time, tasks: tasks}
+    |> Visit.create()
+    |> case do
+      {:error, changeset} -> View.changeset_error_to_human_friendly(changeset)
+      {:ok, visit} -> View.request_visit(visit)
     end
   end
 end

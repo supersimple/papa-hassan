@@ -7,13 +7,16 @@ defmodule Papa.View do
         end)
       end)
 
-    error_msg =
-      errors
-      |> Enum.map(fn {key, errors} -> "#{key} #{Enum.join(errors, ", ")}" end)
-      |> Enum.join("\n")
+    errors
+    |> Enum.map(fn {key, errors} -> "#{key} #{Enum.join(errors, ", ")}" end)
+    |> Enum.join("\n")
   end
 
   def create_user(user) do
     Map.get(user, :id)
+  end
+
+  def request_visit(visit) do
+    "visit requested on #{visit.date}"
   end
 end

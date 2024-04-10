@@ -21,5 +21,14 @@ defmodule Papa.UserTest do
                   [constraint: :unique, constraint_name: "user_email_index"]}
              ]
     end
+
+    test "error: first_name can't be blank" do
+      {:error, changeset} =
+        Papa.User.create(%{
+          email: Faker.Internet.email()
+        })
+
+      assert changeset.errors == [first_name: {"can't be blank", [validation: :required]}]
+    end
   end
 end
