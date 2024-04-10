@@ -6,12 +6,14 @@ defmodule Papa.InterfaceTest do
 
   describe "create_user/3" do
     test "sucess" do
-      {:ok, %User{id: id}} =
+      id =
         Interface.create_user(
           Faker.Person.first_name(),
           Faker.Person.last_name(),
           Faker.Internet.email()
         )
+
+      assert is_binary(id)
     end
 
     test "error" do

@@ -12,4 +12,8 @@ defmodule Papa.View do
       |> Enum.map(fn {key, errors} -> "#{key} #{Enum.join(errors, ", ")}" end)
       |> Enum.join("\n")
   end
+
+  def create_user(user) do
+    Map.get(user, :id)
+  end
 end
