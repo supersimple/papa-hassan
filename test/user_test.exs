@@ -5,18 +5,21 @@ defmodule Papa.UserTest do
   describe "create/1" do
     test "error: email uniqueness" do
       email = Faker.Internet.email()
-      insert(:user, email: email) |> IO.inspect()
 
-     {:error, changeset } =  Papa.User.create(%{
-        email: email,
-        first_name: Faker.Person.first_name(),
-        last_name: Faker.Person.last_name()
-      })
+      insert(:user, email: email)
+
+      {:error, changeset} =
+        Papa.User.create(%{
+          email: email |> String.upcase(),
+          first_name: Faker.Person.first_name(),
+          last_name: Faker.Person.last_name()
+        })
 
       assert changeset.errors == [
-        email: {"has already been taken",
-         [constraint: :unique, constraint_name: "user_email_index"]}
-      ]
+               email:
+                 {"has already been taken",
+                  [constraint: :unique, constraint_name: "user_email_index"]}
+             ]
     end
   end
 end
