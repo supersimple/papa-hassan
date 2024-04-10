@@ -16,7 +16,6 @@ TODO
 
 ## Todo:
 
-- Create an account
 - Can first name last name or email be nil?
 - Request a visit
 - Validate email uniqueness

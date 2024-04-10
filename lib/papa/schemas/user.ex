@@ -24,5 +24,6 @@ defmodule Papa.Schemas.User do
     |> cast(attrs, @attributes)
     |> validate_required(@required_attributes)
     |> EctoCommons.EmailValidator.validate_email(:email, message: "is invalid")
+    |> unique_constraint(:email)
   end
 end
