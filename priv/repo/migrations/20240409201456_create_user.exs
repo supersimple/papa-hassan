@@ -6,7 +6,7 @@ defmodule Papa.Repo.Migrations.CreateUser do
       add :id, :binary_id, primary_key: true
       add :first_name, :string
       add :last_name, :string
-      add :email, :string
+      add :email, :string, collate: :nocase
 
       timestamps()
     end
