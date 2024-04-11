@@ -3,7 +3,7 @@ defmodule Papa.Schemas.Visit do
 
   import Ecto.Changeset
 
-  alias Papa.Schemas.User
+  alias Papa.Schemas.{Transaction, User}
 
   @attributes [:date, :minutes, :tasks, :member_id]
   @required_attributes [:date, :member_id]
@@ -16,6 +16,8 @@ defmodule Papa.Schemas.Visit do
 
     belongs_to(:member, User, type: :binary_id, foreign_key: :member_id)
 
+    has_one(:transaction, Transaction)
+
     timestamps(type: :utc_datetime_usec)
   end
 
@@ -23,6 +25,5 @@ defmodule Papa.Schemas.Visit do
     %__MODULE__{}
     |> cast(attrs, @attributes)
     |> validate_required(@required_attributes)
-    |> foreign_key_constraint(:member_id, name: "visit_member_id_fkey")
   end
 end

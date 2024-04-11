@@ -18,4 +18,12 @@ defmodule Papa.Interface do
       {:ok, visit} -> View.request_visit(visit)
     end
   end
+
+  def unfulfilled_visits() do
+    Visit.all_unfulfilled()
+    |> View.unfulfilled_visits()
+  end
+
+  def fulfill_visit(visit_id, member_id, minutes) do
+  end
 end

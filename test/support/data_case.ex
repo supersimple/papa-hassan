@@ -36,7 +36,6 @@ defmodule Papa.DataCase do
     on_exit(fn -> Ecto.Adapters.SQL.Sandbox.stop_owner(pid) end)
   end
 
-
   defmacro validate_schema_fields_and_types(schema, expected_schemas_and_types) do
     quote do
       test "#{unquote(schema)}: it has the correct fields and types" do

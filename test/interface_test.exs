@@ -40,14 +40,28 @@ defmodule Papa.InterfaceTest do
     end
 
     test "error" do
-      _response =
+      response =
         Interface.request_visit(
           Ecto.UUID.generate(),
           DateTime.utc_now(),
           ["Play with dog", "Friendly conversation"]
         )
 
-      refute true
+      assert response == "member_id doesn't correspond to a real user"
+    end
+  end
+
+  describe "unfulfilled_visits/0" do
+    test "sucess" do
+      member = insert(:user)
+      pal = insert(:user)
+
+      visits = insert_list(5, :visit, member: member)
+
+      insert(:transaction, visit: hd(visits), member: member, pal: pal)
+
+      assert Papa.View.unfulfilled_visits(Enum.take(visits, -(length(visits) - 1)))  ==
+               Interface.unfulfilled_visits()
     end
   end
 end
