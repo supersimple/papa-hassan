@@ -1,5 +1,5 @@
 defmodule Papa.Interface do
-  alias Papa.{User, View, Visit}
+  alias Papa.{Transaction, User, View, Visit}
   alias Papa.Schemas
 
   def create_user(first_name, last_name, email) do
@@ -27,7 +27,16 @@ defmodule Papa.Interface do
 
   def fulfill_visit(visit_id, pal_id) do
     with {:visit, visit} when not is_nil(visit) <- {:visit, Visit.get(visit_id)},
-         {:pal, pal} when not is_nil(pal) <- {:pal, User.get(pal_id)} do
+         # This check should occur at the DB level not application level, SQLite or the Ecto Adapter appears to have issues with
+         # unique foreign keys
+         {:transaction, transaction} when is_nil(transaction) <-
+           {:transaction, Transaction.get_by_visit_id(visit_id)},
+         {:same, false} <- {:same, visit.member_id === pal_id},
+         {:pal, pal} when not is_nil(pal) <- {:pal, User.get(pal_id)},
+         # Member existence should be enforced at the database level, if there's a visit with a member_id
+         # Then that member better exist!
+         member = User.get(visit.member_id),
+         {:enough_minutes, true} <- {:enough_minutes, member.minutes_available >= visit.minutes} do
       transaction_changeset =
         Schemas.Transaction.create_changeset(%{
           visit_id: visit.id,
@@ -35,12 +44,10 @@ defmodule Papa.Interface do
           pal_id: pal_id
         })
 
-      # Member existence should be enforced at the database level, if there's a visit with a member_id
-      # Then that member better exist!
-      member = User.get(visit.member_id)
-
       pal_changeset =
-        Schemas.User.update_changeset(pal, %{minutes_available: pal.minutes_available + floor(visit.minutes * 0.85) })
+        Schemas.User.update_changeset(pal, %{
+          minutes_available: pal.minutes_available + floor(visit.minutes * 0.85)
+        })
 
       member_changeset =
         Schemas.User.update_changeset(member, %{
@@ -55,18 +62,26 @@ defmodule Papa.Interface do
         {:ok, _} ->
           "Success"
 
-        {:error, e} ->
-          IO.inspect(e)
-          "Some kind of error"
+        {:error, _} ->
+          # We can get more granular errors here if we wanted!
+          "Error fulfilling visit"
       end
     else
+      # This should arguably be the responsibility of the view
+      {:transaction, _transaction} ->
+        "visit has already been fulfilled"
+
       {:visit, nil} ->
         "visit_id is invalid"
+
+      {:same, true} ->
+        "cannot fulfill your own visit request"
 
       {:pal, nil} ->
         "pal_id is invalid"
 
-        # {:transaction, {:error, changeset}} -> View.changeset_error_to_human_friendly(changeset)
+      {:enough_minutes, false} ->
+        "member does not have enough minutes"
     end
   end
 end

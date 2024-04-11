@@ -1,5 +1,5 @@
 defmodule Papa.InterfaceTest do
-  use Papa.DataCase
+  use Papa.DataCase, async: false
 
   alias Papa.Interface
 
@@ -96,6 +96,31 @@ defmodule Papa.InterfaceTest do
 
       assert member.minutes_available == 90
       assert pal.minutes_available == floor(30 * 0.85)
+    end
+
+    test "error: member doesn't have enough minutes available" do
+      member = insert(:user, minutes_available: 0)
+      pal = insert(:user, minutes_available: 30)
+
+      visit = insert(:visit, member: member, minutes: 30)
+
+      "member does not have enough minutes" = Interface.fulfill_visit(visit.id, pal.id)
+
+      pal = Papa.Repo.reload(pal)
+      member = Papa.Repo.reload(member)
+
+      assert member.minutes_available == 0
+      assert pal.minutes_available == 30
+    end
+
+    test "error: already fulfilled" do
+      member = insert(:user, minutes_available: 0)
+      pal = insert(:user, minutes_available: 30)
+
+      visit = insert(:visit, member: member, minutes: 30)
+
+      Interface.fulfill_visit(visit.id, pal.id)
+      "member does not have enough minutes" = Interface.fulfill_visit(visit.id, pal.id)
     end
   end
 end

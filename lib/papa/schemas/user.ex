@@ -16,7 +16,7 @@ defmodule Papa.Schemas.User do
     field(:email, :string)
     field(:minutes_available, :integer)
 
-    has_many(:visits, Visit)
+    has_many(:visits, Visit, foreign_key: :member_id)
 
     timestamps(type: :utc_datetime_usec)
   end

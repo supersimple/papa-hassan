@@ -3,7 +3,7 @@ defmodule Papa.Repo.Migrations.AddMinutesAvailableToUser do
 
   def change do
     alter table(:user) do
-      add :minutes_available, :integer, default: 0
+      add :minutes_available, :integer, default: 120
     end
   end
 end

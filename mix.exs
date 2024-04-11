@@ -16,7 +16,7 @@ defmodule Papa.MixProject do
   def application do
     [
       mod: {Papa.Application, []},
-      extra_applications: [:ex_machina, :logger]
+      extra_applications: [:logger]
     ]
   end
 
