@@ -5,8 +5,8 @@ defmodule Papa.Schemas.Visit do
 
   alias Papa.Schemas.{Transaction, User}
 
-  @attributes [:date, :minutes, :tasks, :member_id]
-  @required_attributes [:date, :member_id]
+  @attributes [:date, :minutes, :tasks, :member_id, :minutes]
+  @required_attributes [:date, :member_id, :minutes]
 
   @primary_key {:id, :binary_id, autogenerate: true}
   schema "visit" do

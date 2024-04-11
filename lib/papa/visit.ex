@@ -26,4 +26,8 @@ defmodule Papa.Visit do
 
     Papa.Repo.all(query)
   end
+
+  def get(id) do
+    Papa.Repo.get(Visit, id)
+  end
 end

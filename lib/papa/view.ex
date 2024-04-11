@@ -21,6 +21,6 @@ defmodule Papa.View do
   end
 
   def unfulfilled_visits(visits) do
-    Enum.map(visits, &(Map.take(&1, [:id, :date, :minutes, :tasks])))
+    Enum.map(visits, &Map.take(&1, [:id, :date, :minutes, :tasks]))
   end
 end

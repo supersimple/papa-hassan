@@ -27,24 +27,41 @@ defmodule Papa.InterfaceTest do
 
   describe "request_visit/3" do
     test "sucess" do
-      user = insert(:user)
+      member = insert(:user)
 
-      time = DateTime.utc_now()
+      date = DateTime.utc_now()
+      minutes = Faker.random_between(1, 120)
+      tasks = ["Play with dog", "Friendly conversation"]
 
-      assert "visit requested on #{time}" ==
+      assert "visit requested on #{date}" ==
                Interface.request_visit(
-                 user.id,
-                 time,
-                 ["Play with dog", "Friendly conversation"]
+                 member.id,
+                 date,
+                 tasks,
+                 minutes
                )
+
+      visit = Papa.Repo.one(Papa.Schemas.Visit)
+
+      member_id = member.id
+
+      assert %Papa.Schemas.Visit{
+               minutes: ^minutes,
+               member_id: ^member_id,
+               tasks: ^tasks,
+               date: ^date
+             } = visit
     end
 
     test "error" do
+      minutes = Faker.random_between(1, 120)
+
       response =
         Interface.request_visit(
           Ecto.UUID.generate(),
           DateTime.utc_now(),
-          ["Play with dog", "Friendly conversation"]
+          ["Play with dog", "Friendly conversation"],
+          minutes
         )
 
       assert response == "member_id doesn't correspond to a real user"
@@ -60,8 +77,20 @@ defmodule Papa.InterfaceTest do
 
       insert(:transaction, visit: hd(visits), member: member, pal: pal)
 
-      assert Papa.View.unfulfilled_visits(Enum.take(visits, -(length(visits) - 1)))  ==
+      assert Papa.View.unfulfilled_visits(Enum.take(visits, -(length(visits) - 1))) ==
                Interface.unfulfilled_visits()
+    end
+  end
+
+  describe "fulfill_visit/2" do
+    @tag :only
+    test "sucess" do
+      member = insert(:user)
+      pal = insert(:user)
+
+      visit = insert(:visit, member: member)
+
+      Interface.fulfill_visit(visit.id, pal.id)
     end
   end
 end
