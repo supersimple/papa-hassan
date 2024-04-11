@@ -15,8 +15,8 @@
 `iex -S mix`
 
 ```
-$> member_id = Papa.Interface.create_user("hassan", nil, "hassan@h.com")
-$> pal_id = Papa.Interface.create_user("jerry", nil, "jerry@h.com")
+$> member_id = Papa.Interface.create_user("Ariel", nil, "Ariel@h.com")
+$> pal_id = Papa.Interface.create_user("Jenny", nil, "Jenny@h.com")
 $> Papa.Interface.request_visit(member_id, DateTime.utc_now, ["Cook for me"], 10)
 $> unfulfilled_visit_id = Papa.Interface.unfulfilled_visits() |> List.last |> Map.get(:id)
 $> Papa.Interface.fulfill_visit(unfulfilled_visit_id, pal_id)
@@ -60,4 +60,5 @@ $> Papa.Interface.fulfill_visit(unfulfilled_visit_id, pal_id)
   - I could validate that a date for a requested visit is in the future, or the next day from now.
   - Also that minutes are greater than 0
 - We may want references to have an explicit on_delete behavior if we are not doing soft deletes.
-- Various CI steps (you know em! maybe coveralls and the documentation one...doctor??) mix compile --warnings-as-errors, mix format, run: mix credo --strict, mix test --cover
+- Various CI steps (coveralls, doctor, mix compile --warnings-as-errors, mix format, mix credo --strict)
+- Documentation with examples
