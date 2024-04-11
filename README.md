@@ -6,7 +6,7 @@
 
 - sqlite, on a mac I installed it with `brew install sqlite`
 
-### Steup for tests and REPL
+### Setup for tests and REPL
 
 - `mix deps.get`
 - `mix ecto.create`
