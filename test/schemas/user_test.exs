@@ -9,6 +9,7 @@ defmodule Papa.Schemas.UserTest do
     {:id, :binary_id},
     {:inserted_at, :utc_datetime_usec},
     {:last_name, :string},
+    {:mintes_available, :integer},
     {:updated_at, :utc_datetime_usec}
   ]
 

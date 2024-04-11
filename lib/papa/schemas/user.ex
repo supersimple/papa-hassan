@@ -13,6 +13,7 @@ defmodule Papa.Schemas.User do
     field(:first_name, :string)
     field(:last_name, :string)
     field(:email, :string)
+    field(:mintes_available, :integer)
 
     has_many(:visits, Visit)
 

@@ -17,7 +17,6 @@ TODO
 ## Todo:
 
 - References should probably have an explicit on_delete behavior
-- Do we want to validate / save whether a user is a member or a papa pal?
 - When a user fulfills a visit, make a transaction -15% of the overhead fee.
 - If a members account has a balance of 0 minutes then they cant request any more minutes until they fulfill visits themselves
 - Various CI steps (you know em! maybe coveralls and the documentation one...doctor??) mix compile --warnings-as-errors, mix format, run: mix credo --strict, mix test --cover
@@ -27,6 +26,7 @@ TODO
 - Typespecs are arguably an improvement. The only issue is that it can lead to hard to diagnose issues and be a timesink. Hopefully the Elixir type system addresses types in the future.
 - I would likely design things such that there is a visit_request table and visit_fulfillment table. Two separate tables, I imagine both would be create only. That way things are auditable and each record corresponds to one user generated event. A member says I want someone over for 1 hour! But then a pal can only be there for 30 minutes, we may still want the pal to go and record both pieces of data (minutes requested, minutes fulfilled)
 - Tasks on a Visit can be interpreted two ways: The tasks requested and / or the tasks fulfilled, or both. I interpreted it as the tasks requested.
+- Users are both pals and members, if I wanted to I could have create a role system. Where one user can have multiple roles, or perhaps none if they aren't initiated to the platform yet, if that behavior was desired.
 
 ## Design choices
 
