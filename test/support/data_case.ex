@@ -16,13 +16,8 @@ defmodule Papa.DataCase do
 
   using do
     quote do
-      import Ecto
-      import Ecto.Changeset
-      import Ecto.Query
       import Papa.DataCase
       import Papa.Factory
-
-      alias Papa.Repo
     end
   end
 

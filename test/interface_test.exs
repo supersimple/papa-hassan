@@ -83,14 +83,19 @@ defmodule Papa.InterfaceTest do
   end
 
   describe "fulfill_visit/2" do
-    @tag :only
     test "sucess" do
-      member = insert(:user)
-      pal = insert(:user)
+      member = insert(:user, minutes_available: 120)
+      pal = insert(:user, minutes_available: 0)
 
-      visit = insert(:visit, member: member)
+      visit = insert(:visit, member: member, minutes: 30)
 
       Interface.fulfill_visit(visit.id, pal.id)
+
+      pal = Papa.Repo.reload(pal)
+      member = Papa.Repo.reload(member)
+
+      assert member.minutes_available == 90
+      assert pal.minutes_available == floor(30 * 0.85)
     end
   end
 end

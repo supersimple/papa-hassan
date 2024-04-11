@@ -7,13 +7,14 @@ defmodule Papa.Schemas.User do
 
   @attributes [:first_name, :last_name, :email]
   @required_attributes [:first_name, :email]
+  @update_attributes [:minutes_available]
 
   @primary_key {:id, :binary_id, autogenerate: true}
   schema "user" do
     field(:first_name, :string)
     field(:last_name, :string)
     field(:email, :string)
-    field(:mintes_available, :integer)
+    field(:minutes_available, :integer)
 
     has_many(:visits, Visit)
 
@@ -26,5 +27,9 @@ defmodule Papa.Schemas.User do
     |> validate_required(@required_attributes)
     |> EctoCommons.EmailValidator.validate_email(:email, message: "is invalid")
     |> unique_constraint(:email)
+  end
+
+  def update_changeset(user, attrs) do
+    cast(user, attrs, @update_attributes)
   end
 end

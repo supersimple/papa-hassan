@@ -6,4 +6,8 @@ defmodule Papa.User do
     |> User.create_changeset()
     |> Papa.Repo.insert()
   end
+
+  def get(id) do
+    Papa.Repo.get(User, id)
+  end
 end

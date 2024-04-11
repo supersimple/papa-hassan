@@ -46,3 +46,4 @@ TODO
 
 - `validate_schema_fields_and_types` is a nice way of making assertions that your types are what you want. I learned this from Jeffrey Matthias (https://twitter.com/idlehands) one of the authors of Testing Elixir (https://pragprog.com/titles/lmelixir/testing-elixir/)
 - I added faker and factories (ex_machina) because I love the testing ergonomics they afford me. It's nice to use some realistic dummy data.
+- The factories don't create associations. I find that to be "magical" and would rather manually create associations in tests as it leads to less unexpected behavior im my experience as well as slimmer and easier to read factories.
